@@ -44,6 +44,18 @@ import java.util.concurrent.Executors;
  * {@link ExecutorService} with fixed number of threads (Thread Pool) and use them to execute the
  * {@link Worker}s.
  *
+ *Method 1: Use executer service:
+ * Creates a thread pool that reuses a fixed number of threads
+ * operating off a shared unbounded queue.  At any point, at most
+ * {@code nThreads} threads will be active processing tasks.
+ * If additional tasks are submitted when all threads are active,
+ * they will wait in the queue until a thread is available.
+ * If any thread terminates due to a failure during execution
+ * prior to shutdown, a new one will take its place if needed to
+ * execute subsequent tasks.  The threads in the pool will exist
+ * until it is explicitly
+ * Method 2: Use semophore and use threads smartly
+ *
  */
 public class App {
   
@@ -60,6 +72,7 @@ public class App {
 
     // Create a list of tasks to be executed
     List<Task> tasks = new ArrayList<>();
+
     tasks.add(new PotatoPeelingTask(3));
     tasks.add(new PotatoPeelingTask(6));
     tasks.add(new CoffeeMakingTask(2));
@@ -75,6 +88,7 @@ public class App {
     tasks.add(new CoffeeMakingTask(7));
     tasks.add(new PotatoPeelingTask(4));
     tasks.add(new PotatoPeelingTask(5));
+
 
     // Creates a thread pool that reuses a fixed number of threads operating off a shared
     // unbounded queue. At any point, at most nThreads threads will be active processing
